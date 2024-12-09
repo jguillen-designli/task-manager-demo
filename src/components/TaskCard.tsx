@@ -1,14 +1,27 @@
 'use client';
 
 import { Task } from '@/types/task';
+import { useDrag } from 'react-dnd';
 
 interface TaskCardProps {
   task: Task;
 }
 
 export function TaskCard({ task }: TaskCardProps) {
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: 'TASK',
+    item: { id: task.id, status: task.status },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  }));
+
   return (
-    <div className="bg-white dark:bg-gray-700 rounded-lg shadow p-4 hover:shadow-md transition-shadow cursor-pointer">
+    <div
+      ref={drag}
+      className={`bg-white dark:bg-gray-700 rounded-lg shadow p-4 hover:shadow-md transition-shadow cursor-move
+        ${isDragging ? 'opacity-50' : 'opacity-100'}`}
+    >
       <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-2">
         {task.title}
       </h3>

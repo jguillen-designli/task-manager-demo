@@ -1,3 +1,6 @@
+'use client';
+
+import { useState } from 'react';
 import { Task } from '@/types/task';
 import { Column } from './Column';
 
@@ -40,9 +43,19 @@ const MOCK_TASKS: Task[] = [
 ];
 
 export function Board() {
-  const todoTasks = MOCK_TASKS.filter((task) => task.status === 'todo');
-  const inProgressTasks = MOCK_TASKS.filter((task) => task.status === 'in-progress');
-  const doneTasks = MOCK_TASKS.filter((task) => task.status === 'done');
+  const [tasks, setTasks] = useState(MOCK_TASKS);
+
+  const handleTaskMove = (taskId: string, newStatus: string) => {
+    setTasks(
+      tasks.map((task) =>
+        task.id === taskId ? { ...task, status: newStatus } : task
+      )
+    );
+  };
+
+  const todoTasks = tasks.filter((task) => task.status === 'todo');
+  const inProgressTasks = tasks.filter((task) => task.status === 'in-progress');
+  const doneTasks = tasks.filter((task) => task.status === 'done');
 
   return (
     <div className="max-w-7xl mx-auto">
@@ -50,10 +63,25 @@ export function Board() {
         Task Board
       </h1>
       <div className="flex gap-8 overflow-x-auto pb-8">
-        <Column title="To Do" tasks={todoTasks} />
-        <Column title="In Progress" tasks={inProgressTasks} />
-        <Column title="Done" tasks={doneTasks} />
+        <Column
+          title="To Do"
+          tasks={todoTasks}
+          status="todo"
+          onTaskMove={handleTaskMove}
+        />
+        <Column
+          title="In Progress"
+          tasks={inProgressTasks}
+          status="in-progress"
+          onTaskMove={handleTaskMove}
+        />
+        <Column
+          title="Done"
+          tasks={doneTasks}
+          status="done"
+          onTaskMove={handleTaskMove}
+        />
       </div>
     </div>
   );
-} 
+}
