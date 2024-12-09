@@ -15,7 +15,25 @@
 }
 
 body {
+  min-height: 100vh;
+  background-color: var(--background);
   color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans);
+}
+
+@layer base {
+  body {
+    min-height: 100vh;
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-geist-sans);
+  }
+}
+
+@layer components {
+  /* Add your custom component classes here */
+}
+
+@layer utilities {
+  /* Add your custom utility classes here */
 }
