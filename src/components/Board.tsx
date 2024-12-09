@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Task } from '@/types/task';
+import { Task, TaskStatus } from '@/types/task';
 import { Column } from './Column';
 
 const MOCK_TASKS: Task[] = [
@@ -9,43 +9,43 @@ const MOCK_TASKS: Task[] = [
     id: '1',
     title: 'Design User Interface',
     description: 'Create wireframes and mockups for the new dashboard',
-    status: 'todo',
+    status: 'todo' as TaskStatus,
     createdAt: new Date('2024-03-10'),
   },
   {
     id: '2',
     title: 'Implement Authentication',
     description: 'Set up JWT authentication and user sessions',
-    status: 'in-progress',
+    status: 'in-progress' as TaskStatus,
     createdAt: new Date('2024-03-11'),
   },
   {
     id: '3',
     title: 'Write API Documentation',
     description: 'Document all API endpoints using Swagger',
-    status: 'done',
+    status: 'done' as TaskStatus,
     createdAt: new Date('2024-03-12'),
   },
   {
     id: '4',
     title: 'Database Optimization',
     description: 'Optimize database queries and add indexes',
-    status: 'todo',
+    status: 'todo' as TaskStatus,
     createdAt: new Date('2024-03-13'),
   },
   {
     id: '5',
     title: 'Unit Testing',
     description: 'Write unit tests for core functionality',
-    status: 'in-progress',
+    status: 'in-progress' as TaskStatus,
     createdAt: new Date('2024-03-14'),
   },
 ];
 
 export function Board() {
-  const [tasks, setTasks] = useState(MOCK_TASKS);
+  const [tasks, setTasks] = useState<Task[]>(MOCK_TASKS);
 
-  const handleTaskMove = (taskId: string, newStatus: string) => {
+  const handleTaskMove = (taskId: string, newStatus: TaskStatus) => {
     setTasks(
       tasks.map((task) =>
         task.id === taskId ? { ...task, status: newStatus } : task

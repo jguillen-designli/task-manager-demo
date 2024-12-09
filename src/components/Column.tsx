@@ -1,14 +1,14 @@
 'use client';
 
-import { Task } from '@/types/task';
+import { Task, TaskStatus } from '@/types/task';
 import { TaskCard } from './TaskCard';
 import { useDrop } from 'react-dnd';
 
 interface ColumnProps {
   title: string;
   tasks: Task[];
-  status: 'todo' | 'in-progress' | 'done';
-  onTaskMove: (taskId: string, newStatus: string) => void;
+  status: TaskStatus;
+  onTaskMove: (taskId: string, newStatus: TaskStatus) => void;
 }
 
 export function Column({ title, tasks, status, onTaskMove }: ColumnProps) {
@@ -38,4 +38,4 @@ export function Column({ title, tasks, status, onTaskMove }: ColumnProps) {
       </div>
     </div>
   );
-} 
+}
