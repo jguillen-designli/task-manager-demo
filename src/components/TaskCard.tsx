@@ -29,7 +29,9 @@ export function TaskCard({ task }: TaskCardProps) {
         {task.description}
       </p>
       <div className="text-xs text-gray-500 dark:text-gray-400">
-        {new Date(task.createdAt).toLocaleDateString()}
+        {new Date(task.createdAt).toLocaleDateString('en-US', {
+          timeZone: 'UTC',
+        })}
       </div>
     </div>
   );

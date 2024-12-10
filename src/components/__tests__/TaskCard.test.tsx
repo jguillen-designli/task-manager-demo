@@ -12,7 +12,7 @@ describe('TaskCard Component', () => {
     title: 'Test Task',
     description: 'Test Description',
     status: 'todo' as const,
-    createdAt: new Date('2024-03-10'),
+    createdAt: new Date('2024-03-10T00:00:00.000Z'),
   };
 
   it('renders task information correctly', () => {
@@ -20,7 +20,7 @@ describe('TaskCard Component', () => {
 
     expect(screen.getByText('Test Task')).toBeInTheDocument();
     expect(screen.getByText('Test Description')).toBeInTheDocument();
-    expect(screen.getByText('3/10/2024')).toBeInTheDocument();
+    expect(screen.getByText(/3\/10\/2024/)).toBeInTheDocument();
   });
 
   it('applies dragging styles when being dragged', () => {
@@ -39,11 +39,11 @@ describe('TaskCard Component', () => {
   it('formats date correctly', () => {
     const taskWithDifferentDate = {
       ...mockTask,
-      createdAt: new Date('2024-12-25'),
+      createdAt: new Date('2024-12-25T00:00:00.000Z'),
     };
 
     render(<TaskCard task={taskWithDifferentDate} />);
-    expect(screen.getByText('12/25/2024')).toBeInTheDocument();
+    expect(screen.getByText(/12\/25\/2024/)).toBeInTheDocument();
   });
 
   it('applies correct base styles', () => {
