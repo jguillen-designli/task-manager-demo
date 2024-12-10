@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+import { RootProvider } from '@/components/providers/RootProvider';
 
 export function TestWrapper({ children }: { children: ReactNode }) {
-  return <DndProvider backend={HTML5Backend}>{children}</DndProvider>;
+  return <RootProvider fontClasses="">{children}</RootProvider>;
 }
