@@ -19,5 +19,5 @@ Object.defineProperties(globalThis, {
   BroadcastChannel: { value: BroadcastChannelPolyfill },
   ReadableStream: { value: ReadableStream },
   TransformStream: { value: TransformStream },
-  WritableStream: { value: WritableStream },
+  WritableStream: { value: WritableStream }
 });

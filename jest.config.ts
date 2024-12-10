@@ -1,10 +1,10 @@
-import nextJest from 'next/jest'
+import nextJest from 'next/jest';
 
-import type { Config } from 'jest'
+import type { Config } from 'jest';
 
 const createJestConfig = nextJest({
-  dir: './'
-})
+  dir: './',
+});
 
 const config: Config = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
@@ -17,10 +17,10 @@ const config: Config = {
     '^@services/(.*)$': '<rootDir>/src/services/$1',
     '^@ui/(.*)$': '<rootDir>/src/ui/$1',
     '^@utils/(.*)$': '<rootDir>/src/utils/$1',
-    '^hooks/(.*)$': '<rootDir>/src/hooks/$1'
+    '^hooks/(.*)$': '<rootDir>/src/hooks/$1',
   },
   testEnvironmentOptions: {
-    customExportConditions: ['']
+    customExportConditions: [''],
   },
   transform: {
     '^.+\\.(t|j)sx?$': [
@@ -28,12 +28,14 @@ const config: Config = {
       {
         sourceMaps: true,
         module: {
-          type: 'commonjs'
-        }
-      }
-    ]
+          type: 'commonjs',
+        },
+      },
+    ],
   },
-  transformIgnorePatterns: ['node_modules/(?!(msw|@mswjs)/)'],
+  transformIgnorePatterns: [
+    'node_modules/(?!(node-fetch|data-uri-to-buffer|fetch-blob|formdata-polyfill|msw|@mswjs)/)',
+  ],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   collectCoverage: true,
   coverageDirectory: 'coverage',
@@ -52,3 +54,9 @@ const config: Config = {
   collectCoverageFrom: [
     'src/**/*.{js,jsx,ts,tsx}',
     '!src/**/*.d.ts',
+    '!src/**/*.stories.{js,jsx,ts,tsx}',
+    '!src/**/*.test.{js,jsx,ts,tsx}',
+  ],
+};
+
+export default createJestConfig(config);
